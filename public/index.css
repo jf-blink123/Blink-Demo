@@ -1,0 +1,853 @@
+/* ==========================================================
+   Blink-ish "SOFT DARK" theme (friendly dark canvas + light cards)
+   ========================================================== */
+
+:root{
+  /* Darker canvas (soft, not OLED black) */
+  --bg0:#0B1022;
+  --bg1:#0A0F1D;
+
+  /* Surfaces */
+  --panel: rgba(255,255,255,.06);
+  --card: rgba(255,255,255,.08);
+  --card2: rgba(255,255,255,.06);
+
+  /* Text */
+  --text:#F3F6FF;
+  --muted:rgba(243,246,255,.72);
+  --line:rgba(255,255,255,.12);
+
+  /* Blink-inspired accents */
+  --primary:#2F6BFF;
+  --primary2:#5B8CFF;
+  --secondary:#7C3AED;
+  --secondary2:#9B6BFF;
+
+  /* Shadows */
+  --shadow: 0 18px 50px rgba(0,0,0,.45);
+  --shadow2: 0 12px 28px rgba(0,0,0,.35);
+
+  --radius:18px;
+  --radius2:14px;
+
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--text);
+  background:
+    radial-gradient(900px 650px at 14% 10%, rgba(47,107,255,.18), transparent 62%),
+    radial-gradient(780px 540px at 86% 18%, rgba(124,58,237,.16), transparent 60%),
+    radial-gradient(700px 520px at 50% 92%, rgba(47,107,255,.10), transparent 65%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+.filter-p {
+  color: white;
+}
+
+select option {
+  color: black;
+}
+
+/* Logo: avoid huge bright patch on dark */
+.blink_logo{
+  width: 15vw;
+  height: 18vh;
+  filter: drop-shadow(0 10px 22px rgba(47,107,255,.18));
+  opacity: .95;
+  padding: 5px;
+}
+
+.brand-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-row h1 {
+  color: white !important;
+  margin-right: 20px;
+}
+
+/* Pills */
+.pill{
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.06);
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
+  color: var(--muted);
+}
+.pill strong{ color: var(--text); }
+
+/* Tabs container */
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(12px);
+}
+
+/* Tab buttons */
+.tab-btn{
+  appearance:none;
+  border:1px solid transparent;
+  background: rgba(255,255,255,.02);
+  color: rgba(243,246,255,.78);
+  padding:10px 12px;
+  border-radius: 999px;
+  cursor:pointer;
+  font-weight:850;
+  font-size: 13px;
+  letter-spacing: .2px;
+  transition: .15s ease;
+  outline:none;
+}
+
+.tab-btn:hover{
+  color: var(--text);
+  background: rgba(47,107,255,.10);
+  border-color: rgba(47,107,255,.22);
+}
+
+.tab-btn[aria-selected="true"]{
+  color: #fff;
+  background: linear-gradient(135deg, rgba(47,107,255,.35), rgba(124,58,237,.22));
+  border-color: rgba(47,107,255,.38);
+  box-shadow: 0 16px 34px rgba(47,107,255,.20);
+}
+
+/* Main panel */
+.panel{
+  padding: 20px;
+  margin-top: 14px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  backdrop-filter: blur(14px);
+}
+
+.panel-head{
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background:
+    radial-gradient(520px 240px at 18% 0%, rgba(47,107,255,.20), transparent 60%),
+    linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.panel-head h2{
+  color: white;
+}
+
+/* Nested tags */
+.tag{
+  /* font-size: 12px; */
+  padding: 6px 10px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.06);
+  color: rgba(243,246,255,.82);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 50%;
+}
+.tag[data-selected="true"]{
+  background: rgba(47,107,255,.16);
+  border-color: rgba(47,107,255,.30);
+  color:#fff;
+}
+
+.tag:hover {
+  background-color: #7C3AED;
+}
+
+.panel-body {
+  display: flex;
+  justify-content: center;
+}
+
+/* Cards */
+.card {
+  border-radius: var(--radius2);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,15,29,.55);
+  width: 75%;
+  padding: 14px;
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+}
+
+/* Labels */
+label { 
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Inputs (dark but readable) */
+input, textarea, select{
+  font-family: var(--sans);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 11px;
+  outline:none;
+  transition: .15s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,.15);
+}
+
+textarea{ min-height: 92px; resize: vertical; }
+
+input::placeholder, textarea::placeholder{
+  color: rgba(243,246,255,.40);
+}
+
+input:focus, textarea:focus, select:focus{
+  border-color: rgba(47,107,255,.70);
+  box-shadow: 0 0 0 4px rgba(47,107,255,.20);
+}
+
+/* Buttons */
+.btn{
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  font-weight:850;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor:pointer;
+  transition:.15s ease;
+  user-select:none;
+  box-shadow: 0 12px 26px rgba(0,0,0,.28);
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.08);
+  border-color: rgba(47,107,255,.24);
+  box-shadow: 0 16px 34px rgba(0,0,0,.34);
+}
+
+.btn.primary{
+  background: linear-gradient(135deg, rgba(47,107,255,1), rgba(91,140,255,1));
+  color: #fff;
+  border-color: rgba(47,107,255,.25);
+  box-shadow: 0 18px 36px rgba(47,107,255,.25);
+}
+
+.btn.secondary{
+  background: linear-gradient(135deg, rgba(124,58,237,1), rgba(155,107,255,1));
+  color:#fff;
+  border-color: rgba(124,58,237,.28);
+  box-shadow: 0 18px 36px rgba(124,58,237,.22);
+  width: 10%;
+}
+
+/* Log (dark) */
+.log{
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: rgba(243,246,255,.92);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 220px;
+  max-height: 440px;
+  overflow:auto;
+  box-shadow: 0 14px 30px rgba(0,0,0,.30);
+}
+
+.hint{
+  color: rgba(243,246,255,.68);
+}
+
+/* Paylinks: make rows less blinding */
+.paylinks{
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 30px rgba(0,0,0,.28);
+}
+.paylink-row{
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,15,29,.55);
+  box-shadow: 0 12px 26px rgba(0,0,0,.25);
+}
+.paylink-grid .k{ color: rgba(243,246,255,.55); }
+.paylink-grid .v{ color: rgba(243,246,255,.92); }
+.badge{
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(243,246,255,.90);
+}
+
+/* Utility */
+.hidden{ display:none; }
+
+/* Invoice */
+.invoice{
+  --ink: rgba(243,246,255,.94);
+  --muted: rgba(243,246,255,.68);
+  --line: rgba(255,255,255,.12);
+  --soft: rgba(255,255,255,.04);
+  --card: rgba(10,15,29,.62);
+  --accent: var(--primary);
+
+  padding: 0;
+  min-height: auto;
+  background: transparent;
+  color: var(--ink);
+}
+
+.invoice .pad{
+  max-width: 920px;
+  margin: 0 auto;
+  background:
+    radial-gradient(700px 280px at 14% 0%, rgba(47,107,255,.18), transparent 60%),
+    radial-gradient(640px 260px at 92% 18%, rgba(124,58,237,.14), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.42);
+  position: relative;
+  overflow: hidden;
+}
+
+.invoice .pad::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.06), transparent 18%, transparent 82%, rgba(255,255,255,.04)),
+    radial-gradient(420px 220px at 0% 100%, rgba(47,107,255,.10), transparent 60%);
+  pointer-events:none;
+  opacity:.75;
+}
+
+/* Header */
+.invoice .top{
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: start;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.invoice .title{
+  margin: 0;
+  font-weight: 950;
+  letter-spacing: .18em;
+  font-size: 28px;
+  line-height: 1.1;
+  color: rgba(243,246,255,.96);
+}
+
+.invoice .meta{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 6px 14px;
+  text-align: right;
+  align-content: start;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(10,15,29,.35);
+  backdrop-filter: blur(10px);
+}
+
+.invoice .meta .label{
+  color: rgba(243,246,255,.62);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+}
+
+.invoice .meta .value{
+  margin: 0;
+  font-weight: 800;
+  font-size: 13px;
+  color: rgba(243,246,255,.92);
+}
+
+/* Parties */
+.invoice .parties{
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 0 0 16px;
+}
+
+.invoice .box{
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(10,15,29,.40);
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+
+.invoice .heading{
+  margin: 0 0 8px;
+  color: rgba(243,246,255,.62);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+}
+
+.invoice .name{
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: 15px;
+  color: rgba(243,246,255,.95);
+}
+
+.invoice .line{
+  margin: 0;
+  color: rgba(243,246,255,.78);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Table */
+.invoice .table-wrap{
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+}
+
+.invoice table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  background: rgba(10,15,29,.35);
+  box-shadow: 0 10px 24px rgba(0,0,0,.20);
+}
+
+.invoice thead th{
+  background: linear-gradient(135deg, rgba(47,107,255,.18), rgba(124,58,237,.10));
+  color: rgba(243,246,255,.92);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.invoice tbody td{
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  font-size: 13px;
+  color: rgba(243,246,255,.86);
+}
+
+.invoice tbody tr:last-child td{ border-bottom: 0; }
+
+.invoice th.desc, .invoice td.desc{ text-align: left; width: 55%; }
+.invoice th.num,  .invoice td.num { text-align: right; width: 15%; white-space: nowrap; }
+
+.invoice tbody tr:hover td{
+  background: rgba(255,255,255,.04);
+}
+
+.invoice-builder__section-title {
+  margin-bottom: 30px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Total */
+.invoice .total{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  background:
+    radial-gradient(520px 200px at 20% 0%, rgba(47,107,255,.14), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+
+.invoice .muted{
+  color: rgba(243,246,255,.70);
+  font-weight: 750;
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.invoice .amount{
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.98);
+}
+
+/* Bottom section */
+.invoice .bottom{
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+
+.invoice .small-heading{
+  margin: 0 0 8px;
+  color: rgba(243,246,255,.62);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+}
+
+.invoice .pay p{
+  margin: 0;
+  color: rgba(243,246,255,.80);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.invoice .notes{
+  border: 1px dashed rgba(255,255,255,.16);
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: rgba(10,15,29,.30);
+  min-height: 86px;
+}
+
+/* Pay CTA */
+.invoice .pay-cta{
+  position: relative;
+  z-index: 1;
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.invoice .pay-with-blink-btn{
+  appearance: none;
+  border: 1px solid rgba(47,107,255,.30);
+  background: linear-gradient(135deg, rgba(47,107,255,1), rgba(91,140,255,1));
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+  box-shadow: 0 18px 36px rgba(47,107,255,.24);
+}
+
+.invoice .pay-with-blink-btn:hover{
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+  box-shadow: 0 22px 44px rgba(47,107,255,.30);
+}
+
+.invoice .pay-with-blink-btn:active{
+  transform: translateY(0);
+  box-shadow: 0 16px 34px rgba(47,107,255,.24);
+}
+
+.invoice .pay-with-blink-btn:focus-visible{
+  outline: 3px solid rgba(47,107,255,.30);
+  outline-offset: 2px;
+}
+
+/* Footer */
+.invoice .footer{
+  position: relative;
+  z-index: 1;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(243,246,255,.66);
+  font-size: 12px;
+}
+
+#inv_service_select option, #inv_reminder option, #inv_reminder_interval_frequency option, #inv_reminder_interval_frequency option{
+  color: black;
+}
+
+.invoice .site{ font-weight: 750; }
+
+.invoice-builder__grid {
+  padding: 50px;
+}
+
+.text_area_input {
+  display: flex;
+}
+
+#inv_meta_data {
+  margin-top: 5px;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 720px){
+  .invoice .pad{ padding: 18px; border-radius: 16px; }
+  .invoice .top{ grid-template-columns: 1fr; text-align: left; }
+  .invoice .meta{ text-align: left; justify-content: start; width: fit-content; }
+  .invoice .parties, .invoice .bottom{ grid-template-columns: 1fr; }
+  .invoice th.desc, .invoice td.desc{ width: auto; }
+  .invoice th.num,  .invoice td.num { width: auto; }
+}
+
+/* Paylinks */
+.view-mount{ margin-top: 14px; }
+
+/* container */
+.paylinks{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(680px 260px at 16% 0%, rgba(47,107,255,.16), transparent 60%),
+    radial-gradient(620px 240px at 92% 18%, rgba(124,58,237,.12), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  padding: 14px;
+}
+
+/* header */
+.paylinks-head{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  margin-bottom: 12px;
+}
+
+.paylinks-title{
+  font-weight: 950;
+  letter-spacing: .2px;
+  color: rgba(243,246,255,.96);
+}
+
+.paylinks-sub{
+  color: rgba(243,246,255,.64);
+  font-size: 12px;
+}
+
+/* list */
+.paylinks-list{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* row card */
+.paylink-row{
+  /* display:flex;
+  align-items: center;
+  justify-content: space-between; */
+  /* gap: 14px; */
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,15,29,.45);
+  box-shadow: 0 10px 26px rgba(0,0,0,.22);
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.paylink-row:hover{
+  transform: translateY(-1px);
+  border-color: rgba(47,107,255,.28);
+  background: rgba(10,15,29,.55);
+}
+
+/* left side */
+.paylink-main{
+  /* min-width: 0; */
+  /* width: 40% !important; */
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.paylink-name{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 900;
+  color: rgba(243,246,255,.92);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 50%;
+}
+
+/* badges (works even if you only have .badge + text) */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(243,246,255,.88);
+}
+
+/* “semantic” badge coloring without changing your HTML:
+   uses content text match via attribute-free selectors is not possible in pure CSS,
+   so we keep a nice neutral badge that fits all statuses. */
+
+/* actions */
+.paylink-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap: 10px;
+}
+
+/* Make the existing secondary button feel consistent */
+.paylink-actions .btn.secondary{
+  border: 1px solid rgba(47,107,255,.30);
+  background: rgba(47,107,255,.16);
+  color: rgba(243,246,255,.96);
+  box-shadow: 0 14px 30px rgba(47,107,255,.16);
+}
+
+.paylink-actions .btn.secondary:hover{
+  background: rgba(47,107,255,.22);
+  border-color: rgba(47,107,255,.42);
+  box-shadow: 0 18px 38px rgba(47,107,255,.22);
+  transform: translateY(-1px);
+}
+
+.paylink-actions .btn.secondary:active{
+  transform: translateY(0);
+  box-shadow: 0 14px 30px rgba(47,107,255,.16);
+}
+
+/* responsive */
+@media (max-width: 720px){
+  .paylink-row{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .paylink-actions{
+    justify-content: flex-end;
+  }
+}
+
+.badge {
+  color: white;
+}
+
+/* Paylink status badges */
+.badge--paid{
+  background: rgba(34,197,94,.14);
+  border-color: rgba(34,197,94,.35);
+}
+
+.badge--unpaid{
+  background: rgba(245,158,11,.16);
+  border-color: rgba(245,158,11,.35);
+}
+
+.badge--payment-attempted{
+  background: rgba(47,107,255,.16);
+  border-color: rgba(47,107,255,.35);
+}
+
+.badge--cancelled{
+  background: rgba(239,68,68,.16);
+  border-color: rgba(239,68,68,.35);
+}
+
+/* ---------- Paylinks list loading (large spinner in list area) ---------- */
+.paylinks-loading {
+  min-height: 240px;              /* makes it big/clear in the DOM */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius2);
+  background: var(--card2);
+}
+
+.paylinks-spinner {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 6px solid rgba(255, 255, 255, 0.22);
+  border-top-color: var(--primary);
+  animation: paylinks-spin 0.85s linear infinite;
+}
+
+.paylinks-loading-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.paylinks-empty {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius2);
+  background: var(--card2);
+  color: var(--muted);
+}
+
+@keyframes paylinks-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pre-Sales Demos</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://secure.blinkpayment.co.uk/assets/css/api.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="brand-row">
+          <img src="./assets/images/blink_logo.png" alt="blink_logo" class="blink_logo">
+          <!-- <h1>Blink Payment Demo</h1> -->
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Demo scenarios"></nav>
+
+    <section class="panel" aria-live="polite">
+      <div class="panel-head">
+        <div>
+          <h2 id="panelTitle">Scenario</h2>
+          <div class="hint" id="panelDesc"></div>
+        </div>
+        <div class="meta" id="panelMeta"></div>
+      </div>
+
+      <div class="panel-body">
+        <div class="card">
+
+          <pre id="log" style="margin-top:12px; white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./index.js" type="module"></script>
+</body>
+</html>
